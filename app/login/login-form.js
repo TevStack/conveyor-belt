@@ -32,11 +32,17 @@ export default function LoginForm({ linkError }) {
       options: { emailRedirectTo: callback(), shouldCreateUser: true },
     });
     setBusy(false);
-    setState(
-      error
-        ? { kind: "err", text: "Couldn't send the link. Check the address and try again." }
-        : { kind: "ok", text: `Check your inbox. We've sent a sign-in link to ${email.trim()}.` }
-    );
+    if (!error) {
+      setState({ kind: "ok", text: `Check your inbox. We've sent a sign-in link to ${email.trim()}.` });
+      return;
+    }
+    const msg = (error.message || "").toLowerCase();
+    let text = `Couldn't send the link: ${error.message || "unknown error"}.`;
+    if (msg.includes("not authorized") || msg.includes("not authorised"))
+      text = "Email sign-in links aren't set up for this address yet. Use Continue with Google, or ask Tom.";
+    else if (msg.includes("rate limit") || error.status === 429)
+      text = "Too many sign-in emails in the last hour. Wait a few minutes and try again, or use Continue with Google.";
+    setState({ kind: "err", text });
   }
 
   return (
