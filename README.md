@@ -25,8 +25,9 @@ Enforced in Supabase with row-level security (`supabase/migrations/0001_conveyor
 ## Setup
 
 1. **Supabase**: open the SQL editor, paste `supabase/migrations/0001_conveyor_belt.sql`, replace `YOUR EMAIL` with your work email, run it.
-2. **Supabase → Authentication → URL configuration**: set Site URL to the Vercel URL and add `https://<vercel-url>/auth/callback` (and `http://localhost:3000/auth/callback`) to Redirect URLs.
-3. **Google sign-in** (optional, email links work without it): Authentication → Providers → Google, using an OAuth client from Google Cloud with the Supabase callback URL.
+2. **Supabase → Authentication → Sign In / Providers → Email**: turn **Confirm email** off, so setting a password doesn't send an email.
+3. **Supabase → Authentication → URL configuration**: set Site URL to the Vercel URL and add `https://<vercel-url>/auth/callback` to Redirect URLs.
+4. **Google sign-in** (at launch, after IT approval): Authentication → Providers → Google with an OAuth client from Google Cloud, then set `NEXT_PUBLIC_GOOGLE_SIGNIN=on` in Vercel.
 4. **Environment variables** (Vercel and `.env.local`): see `.env.example`.
 
 ```bash
@@ -36,7 +37,9 @@ npm run dev
 
 ## Access
 
-Anyone can request a sign-in link, but only people on the **People** list (matched by email) get in. Add someone on the People tab with their work email; their account links on first sign-in.
+During testing people sign in with their work email and a password they choose on first visit ("First time here? Set up my password"). Only people on the **People** list (matched by email) get in. Add someone on the People tab with their work email first.
+
+Forgotten password: delete their user in Supabase → Authentication → Users, then they set up a new password. Their People row re-links automatically.
 
 ## Code map
 
