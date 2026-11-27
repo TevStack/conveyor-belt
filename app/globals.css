@@ -453,11 +453,12 @@ footer b{color:var(--orange)}
 /* helpers */
 .av.hav{width:20px;height:20px;font-size:9px;margin-left:-8px;border:2px solid var(--white);background:var(--teal)}
 
-/* one-click done */
-.tile .tick{border:2px solid var(--green);background:var(--white);color:var(--green);border-radius:50%;width:30px;height:30px;min-height:30px;font-weight:900;font-size:14px;display:grid;place-items:center;padding:0;margin-left:auto}
-.tile .tick:hover{background:var(--green);color:var(--white)}
-.tile .mv+.tick{margin-left:6px}
-
 /* blocked by */
 .blockby{font-size:11.5px;font-weight:700;color:var(--red-ink);flex-basis:100%}
 .a-blocked{grid-column:1/-1;background:var(--red-tint);color:var(--red-ink);border-radius:8px;padding:8px 10px;font-size:13.5px}
+.blockby.ok{color:var(--green)}.blockby.amber{color:var(--orange-ink)}
+.a-blocked .blist{list-style:none;margin:6px 0 4px;padding:0;display:grid;gap:4px}
+.a-blocked .blist li{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.a-blocked .blist li.bdone .lnk{text-decoration:line-through;color:var(--muted)}
+.a-blocked .ready{color:var(--green);font-weight:800;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.a-holding{grid-column:1/-1;background:var(--orange-wash);color:var(--orange-ink);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700}
